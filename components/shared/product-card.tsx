@@ -27,7 +27,7 @@ export const ProductCard: FC<IProductCardProps> = ({
 			className='rounded-xl bg-white p-2 w-[170px] sm:w-56 inline-block'
 			href={`/product/${id}`}
 		>
-			<Image width={300} height={300} src={imageUrl} alt={name} />
+			<img width={300} height={300} src={imageUrl} alt={name} />
 			<div className='p-3'>
 				<H3>{name}</H3>
 				<p>Ингридиенты пиццы</p>

@@ -7,20 +7,23 @@ import { FC } from 'react'
 
 import { Button } from '../ui'
 import { Container } from './container'
+import { SearchInput } from './search-input'
 
 interface IHeaderProps {}
 
 export const Header: FC<IHeaderProps> = ({}) => {
 	const handleClick = () => {
-		console.log('click')
 	}
 	return (
 		<header>
 			<Container className='flex items-center justify-between flex-col sm:flex-row gap-4 py-4 sm:py-6'>
 				<Link href='/' className='flex items-center gap-4'>
-					<Image width={32} height={32} src='/images/logo.svg' alt='logo' />
+					<img width={32} height={32} src='/images/logo.svg' alt='logo' />
 					<span className='text-xl font-bold uppercase'>Куда пицца</span>
 				</Link>
+				<div className='flex-1 mx-10'>
+					<SearchInput/>
+				</div>
 				<div className='flex justify-between items-center w-full sm:w-fit gap-4'>
 					<div
 						onClick={handleClick}

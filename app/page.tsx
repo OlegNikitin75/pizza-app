@@ -6,7 +6,7 @@ import {
 	TopBar
 } from '@/components/shared'
 
-export default function Home() {
+export const Home= () => {
 	return (
 		<>
 			<TopBar />
@@ -93,3 +93,4 @@ export default function Home() {
 		</>
 	)
 }
+export default Home
