@@ -12,9 +12,10 @@ interface ICheckboxFiltersGroupProps {
 	defaultItems: Item[]
 	limit?: number
 	searchInputPlaceholder?: string
-	onChange?: (values: string[]) => void
+	onClickCheckbox?: (id: string) => void
 	defaultValue?: string[]
 	className?: string
+	selectedIds?: Set<string>
 }
 
 export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
@@ -22,9 +23,10 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 	defaultItems,
 	limit = 5,
 	searchInputPlaceholder = 'Поиск...',
-	onChange,
+	onClickCheckbox,
 	defaultValue,
-	className
+	className,
+	selectedIds
 }) => {
 	const [openAll, setOpenAll] = useState(false)
 	const [searchValue, setSearchValue] = useState('')
@@ -36,6 +38,7 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 	const setSearchInputValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(event.target.value)
 	}
+
 	return (
 		<div className='space-y-5'>
 			{openAll && (
@@ -53,10 +56,8 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 					<FilterCheckbox
 						key={String(item.value)}
 						text={item.text}
-						onCheckedChange={() => {}}
-						//onCheckedChange={() => onCheckedChange(item.value)}
-						// checked={selected.has(item.value)}
-						checked={false}
+						onCheckedChange={() => onClickCheckbox?.(item.value)}
+						checked={selectedIds?.has(item.value)}
 						value={item.value}
 						endAdornment={item.endAdornment}
 					/>
@@ -67,7 +68,7 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 					onClick={() => setOpenAll(!openAll)}
 					className='text-app-primary font-semibold py-2'
 				>
-					{openAll ? '- показать все' : '+ показать все'}
+					{openAll ? '- скрыть все' : '+ показать все'}
 				</button>
 			)}
 		</div>

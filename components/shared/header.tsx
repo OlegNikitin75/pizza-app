@@ -1,17 +1,14 @@
 'use client'
 
 import { ArrowRight, ShoppingCart, UserRound } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { FC } from 'react'
 
 import { Button } from '../ui'
 import { Container } from './container'
 import { SearchInput } from './search-input'
 
-interface IHeaderProps {}
 
-export const Header: FC<IHeaderProps> = ({}) => {
+export const Header = () => {
 	const handleClick = () => {
 	}
 	return (

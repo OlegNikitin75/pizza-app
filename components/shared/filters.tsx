@@ -1,20 +1,29 @@
 'use client'
-import { FC, useState } from 'react'
 
-import { CheckboxFiltersGroup, FilterCheckbox, Heading, RangeSlider } from '.'
+import { useFilterIngredients } from '@/hooks/useFilterIngredients'
+import { useState } from 'react'
+
+import { CheckboxFiltersGroup, FilterCheckbox, RangeSlider } from '.'
 import { Button, Input } from '../ui'
 
-interface IFiltersProps {}
+export const Filters = () => {
+	const { ingredients,onAddId, selectedIds } = useFilterIngredients()
+	const items = ingredients.map(item => ({
+		value: String(item.id),
+		text: item.name
+	}))
 
-export const Filters: FC<IFiltersProps> = ({}) => {
 	const [showFilters, setShowFilters] = useState(false)
 	return (
 		<div className=' sm:space-y-10 '>
-			<Button onClick={() => setShowFilters(!showFilters)} className='w-full text-lg'>
+			<Button
+				onClick={() => setShowFilters(!showFilters)}
+				className='w-full text-lg'
+			>
 				{showFilters ? 'Скрыть фильтры' : 'Показать фильтры'}
 			</Button>
-			{
-				showFilters && (<div className='mt-5 space-y-6'>
+			{showFilters && (
+				<div className='mt-5 space-y-6'>
 					<div className='flex flex-col gap-y-4'>
 						<FilterCheckbox text='Доступно для сборки' value='1' />
 						<FilterCheckbox text='Новинки' value='2' />
@@ -37,27 +46,14 @@ export const Filters: FC<IFiltersProps> = ({}) => {
 						<p className='font-semibold mb-3'>Ингридиенты:</p>
 						<CheckboxFiltersGroup
 							limit={5}
-							defaultItems={[
-								{ text: 'Сырный соус', value: '1' },
-								{ text: 'Моцарелла', value: '2' },
-								{ text: 'Чеснок', value: '3' },
-								{ text: 'Соленые огурчики', value: '4' },
-								{ text: 'Красный лук', value: '5' },
-								{ text: 'Томаты', value: '6' }
-							]}
-							items={[
-								{ text: 'Сырный соус', value: '1' },
-								{ text: 'Моцарелла', value: '2' },
-								{ text: 'Чеснок', value: '3' },
-								{ text: 'Соленые огурчики', value: '4' },
-								{ text: 'Красный лук', value: '5' },
-								{ text: 'Томаты', value: '6' }
-							]}
+							defaultItems={items.slice(0, 6)}
+							items={items}
+							onClickCheckbox={onAddId}
+							selectedIds={selectedIds}
 						/>
 					</div>
-				</div>)
-			}
-			
+				</div>
+			)}
 		</div>
 	)
 }

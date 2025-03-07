@@ -5,7 +5,7 @@ import { Product } from '@prisma/client'
 import clsx from 'clsx'
 import { Search } from 'lucide-react'
 import Link from 'next/link'
-import { FC, SetStateAction, useEffect, useRef, useState } from 'react'
+import { FC, SetStateAction, useRef, useState } from 'react'
 import { useClickAway, useDebounce } from 'react-use'
 
 interface ISearchInputProps {
@@ -22,8 +22,13 @@ export const SearchInput: FC<ISearchInputProps> = ({ className }) => {
 	})
 
 	useDebounce(
-		() => {
-			Api.products.search(searchQuery).then(items => setProducts(items))
+		async () => {
+			try {
+				const res = await Api.products.search(searchQuery)
+				setProducts(res)
+			} catch (error) {
+				console.log(error)
+			}
 		},
 		200,
 		[searchQuery]
