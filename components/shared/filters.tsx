@@ -1,37 +1,34 @@
 'use client'
 
-import { useFilterIngredients } from '@/hooks/useFilterIngredients'
+import { useFiltersState } from '@/hooks/use-filters-state'
+import { useIngredients } from '@/hooks/use-ingredients'
+import { useQueryFilters } from '@/hooks/use-query-filters'
+import { useRouter } from 'next/navigation'
+import qs from 'qs'
 import { useEffect, useState } from 'react'
-import { useSet } from 'react-use'
 
+import { CheckboxFiltersGroup, H3, RangeSlider } from '.'
 import { Button, Input } from '../ui'
 
-interface IPropsInputRange {
-	priceFrom: number
-	priceTo: number
-}
-
 export const Filters = () => {
-	const { ingredients, onAddId, selectedIngredients } = useFilterIngredients()
+	const router = useRouter()
+
+	const { ingredients } = useIngredients()
+
+	const filters = useFiltersState()
+	useQueryFilters(filters)
 
 	const items = ingredients.map(item => ({
 		value: String(item.id),
 		text: item.name
 	}))
 
-	const [sizes, { toggle: toggleSizes }] = useSet<string>(new Set([]))
-	const [types, { toggle: toggleTypes }] = useSet<string>(new Set([]))
+	const updatePrice = (prices: number[]) => {
+		filters.setPriceRange('priceFrom', prices[0])
+		filters.setPriceRange('priceTo', prices[1])
+	}
 
 	const [showFilters, setShowFilters] = useState(false)
-
-	const [{ priceFrom, priceTo }, setPriceRange] = useState<IPropsInputRange>({
-		priceFrom: 0,
-		priceTo: 200
-	})
-
-	const updatePrice = (name: keyof IPropsInputRange, value: number) => {
-		setPriceRange(prev => ({ ...prev, [name]: value }))
-	}
 
 	return (
 		<div className=' sm:space-y-10 '>
@@ -47,8 +44,8 @@ export const Filters = () => {
 						<H3>Размеры:</H3>
 						<CheckboxFiltersGroup
 							name='sizes'
-							onClickCheckbox={toggleSizes}
-							selected={sizes}
+							onClickCheckbox={filters.setSizes}
+							selected={filters.sizes}
 							items={[
 								{
 									text: '20 см',
@@ -69,8 +66,8 @@ export const Filters = () => {
 						<H3>Тип теста:</H3>
 						<CheckboxFiltersGroup
 							name='types'
-							onClickCheckbox={toggleTypes}
-							selected={types}
+							onClickCheckbox={filters.setTypes}
+							selected={filters.types}
 							items={[
 								{
 									text: 'Тонкое',
@@ -92,26 +89,31 @@ export const Filters = () => {
 								placeholder='0'
 								min={0}
 								max={200}
-								value={String(priceFrom)}
-								onChange={e => updatePrice('priceFrom', Number(e.target.value))}
+								value={String(filters.priceRange.priceFrom)}
+								onChange={e =>
+									filters.setPriceRange('priceFrom', Number(e.target.value))
+								}
 							/>
 							<Input
 								type='number'
 								placeholder='200'
 								min={10}
 								max={200}
-								value={String(priceTo)}
-								onChange={e => updatePrice('priceTo', Number(e.target.value))}
+								value={String(filters.priceRange.priceTo)}
+								onChange={e =>
+									filters.setPriceRange('priceTo', Number(e.target.value))
+								}
 							/>
 						</div>
 						<RangeSlider
 							min={0}
 							max={200}
 							step={1}
-							value={[priceFrom, priceTo]}
-							onValueChange={([priceFrom, priceTo]) =>
-								setPriceRange({ priceFrom, priceTo })
-							}
+							value={[
+								filters.priceRange.priceFrom || 0,
+								filters.priceRange.priceTo || 200
+							]}
+							onValueChange={updatePrice}
 						/>
 					</div>
 					<div>
@@ -120,8 +122,8 @@ export const Filters = () => {
 							limit={5}
 							defaultItems={items.slice(0, 6)}
 							items={items}
-							onClickCheckbox={onAddId}
-							selected={selectedIngredients}
+							onClickCheckbox={filters.setIngredients}
+							selected={filters.selectedIngredients}
 							name='ingredients'
 						/>
 					</div>
