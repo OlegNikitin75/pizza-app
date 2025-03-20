@@ -1,17 +1,17 @@
+import { Ingredient } from '@prisma/client'
 import { Plus } from 'lucide-react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
+import { H3, P } from '.'
 import { Button } from '../ui'
-import { Heading } from './heading'
-import { H3 } from '.'
 
 interface IProductCardProps {
-	id: string
+	id: number
 	name: string
 	price: number
 	imageUrl: string
+	ingredients: Ingredient[]
 	className?: string
 }
 
@@ -20,17 +20,30 @@ export const ProductCard: FC<IProductCardProps> = ({
 	name,
 	price,
 	imageUrl,
+	ingredients,
 	className
 }) => {
+	const getIngredientsList = () => {
+		let str = ''
+		ingredients.forEach(ingredient => {
+			str += ingredient.name + ', '
+		})
+		return str.slice(0, -2)
+	}
+
 	return (
 		<Link
-			className='rounded-xl bg-white p-2 w-[170px] sm:w-56 inline-block'
+			className='rounded-xl bg-white p-2 w-[170px] sm:h-[414px]
+			 sm:w-56 inline-flex justify-between flex-col '
 			href={`/product/${id}`}
 		>
 			<img width={300} height={300} src={imageUrl} alt={name} />
-			<div className='p-3'>
-				<H3>{name}</H3>
-				<p>Ингридиенты пиццы</p>
+			<div className='flex-1 p-3 flex flex-col justify-between '>
+				<div>
+					<H3>{name}</H3>
+					<P>{getIngredientsList()}</P>
+				</div>
+
 				<div className='flex justify-between items-center mt-4'>
 					<Button variant='secondary' size='sm'>
 						<span className='hidden sm:inline-block'>Выбрать</span>
@@ -39,7 +52,18 @@ export const ProductCard: FC<IProductCardProps> = ({
 						</span>
 					</Button>
 					<span>
-						от <span className=' text-base sm:text-xl font-bold'>{price} р.</span>
+						{imageUrl.includes('pizza') ? (
+							<>
+								<span className='pr-2'>от</span>
+								<span className=' text-base sm:text-xl font-bold'>
+									{price} р.
+								</span>
+							</>
+						) : (
+							<span className=' text-base sm:text-xl font-bold'>
+								{price} р.
+							</span>
+						)}
 					</span>
 				</div>
 			</div>

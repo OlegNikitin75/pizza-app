@@ -1,17 +1,18 @@
 'use client'
 
+import { ProductWithRelations } from '@/@types/prisma'
 import { useCategoryStore } from '@/store/category-store'
 import clsx from 'clsx'
 import { FC, useEffect, useRef } from 'react'
 import { useIntersection } from 'react-use'
 
-import { H2, Heading } from '.'
+import { H2 } from '.'
 import { ProductCard } from './product-card'
 
 interface IProductsGroupListProps {
 	title: string
-	idForUrl: string
-	items: any[]
+	idForUrl?: string
+	items: ProductWithRelations[]
 	className?: string
 	listClassName?: string
 	categoryId: number
@@ -26,7 +27,7 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 }) => {
 	const intersectionRef = useRef(null)
 	const intersection = useIntersection(intersectionRef, {
-		threshold: 0.8
+		threshold: 0.4
 	})
 	const setActiveCategoryId = useCategoryStore(state => state.setActiveId)
 
@@ -35,9 +36,14 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 	}, [categoryId, intersection?.isIntersecting, setActiveCategoryId])
 
 	return (
-		<div className='w-full' id={idForUrl} ref={intersectionRef}>
-			<H2>{title}</H2>
-			<div className={clsx('flex flex-wrap gap-4 justify-between sm:justify-start', listClassName)}>
+		<div id={title} ref={intersectionRef}>
+			<H2 className='mb-4'>{title}</H2>
+			<div
+				className={clsx(
+					'flex flex-wrap gap-4 justify-between sm:justify-start',
+					listClassName
+				)}
+			>
 				{items.map(item => (
 					<ProductCard
 						key={item.id}
@@ -45,6 +51,7 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 						name={item.name}
 						price={item.items[0].price}
 						imageUrl={item.imageUrl}
+						ingredients={item.ingredients}
 					/>
 				))}
 			</div>

@@ -88,7 +88,7 @@ export const Filters = () => {
 								type='number'
 								placeholder='0'
 								min={0}
-								max={200}
+								max={100}
 								value={String(filters.priceRange.priceFrom)}
 								onChange={e =>
 									filters.setPriceRange('priceFrom', Number(e.target.value))
@@ -96,9 +96,9 @@ export const Filters = () => {
 							/>
 							<Input
 								type='number'
-								placeholder='200'
+								placeholder='100'
 								min={10}
-								max={200}
+								max={100}
 								value={String(filters.priceRange.priceTo)}
 								onChange={e =>
 									filters.setPriceRange('priceTo', Number(e.target.value))
@@ -107,11 +107,11 @@ export const Filters = () => {
 						</div>
 						<RangeSlider
 							min={0}
-							max={200}
+							max={100}
 							step={1}
 							value={[
 								filters.priceRange.priceFrom || 0,
-								filters.priceRange.priceTo || 200
+								filters.priceRange.priceTo || 100
 							]}
 							onValueChange={updatePrice}
 						/>

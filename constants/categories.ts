@@ -1,9 +1,8 @@
 export const CATEGORIES = [
-	{ id: 1, title: 'Пицца', url: '#pizza' },
-	{ id: 2, title: 'Суши', url: '#sushi' },
-	{ id: 3, title: 'Напитки', url: '#drinks' },
-	{ id: 4, title: 'Закуски', url: '#snacks' },
-	{ id: 5, title: 'Комбо', url: '#combo' },
-	{ id: 6, title: 'Десерты', url: '#desserts' },
-	{ id: 7, title: 'Соусы', url: '#sauce' }
-]
+	{ id: 1, title: 'Пицца', url: '#Пицца' },
+	{ id: 2, title: 'Комбо', url: '#Комбо' },
+	{ id: 3, title: 'Закуски', url: '#Закуски' },
+	{ id: 4, title: 'Десерты', url: '#Десерты' },
+	{ id: 5, title: 'Напитки', url: '#Напитки' },
+	{ id: 6, title: 'Соусы', url: '#Соусы' }
+] 

@@ -55,7 +55,7 @@ model Product {
 model ProductItem {
   id Int @id @default(autoincrement())
 
-  price     Int
+  price     Float
   size      Int?
   pizzaType Int?
 
