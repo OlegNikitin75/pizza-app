@@ -11,11 +11,11 @@ export const Categories = () => {
 				<a
 					key={cat.title}
 					href={cat.url}
-					className={`group flex flex-col justify-center items-center gap-y-2 text-app-primary rounded-lg py-2 sm:w-32 w-full px-4 ${cat.id === categoryActiveId ? ' bg-app-primary' : 'bg-white'}`}
+					className={`hover:bg-white/50 duration-300 flex flex-col justify-center items-center gap-y-2 text-app-primary rounded-lg py-2 sm:w-32 w-full px-4 ${cat.id === categoryActiveId ? ' bg-app-primary pointer-events-none' : 'bg-white'}`}
 				>
 
 					<span
-						className={`group-hover:text-app-primary transition duration-300 text-app-black text-lg ${cat.id === categoryActiveId ? ' text-white' : ''}`}
+						className={`text-app-black text-lg ${cat.id === categoryActiveId ? ' text-white' : ''}`}
 					>
 						{cat.title}
 					</span>

@@ -9,7 +9,7 @@ interface IProductImageProps {
 
 export const ProductImage: FC<IProductImageProps> = ({ src, alt, size }) => {
 	return (
-		<div>
+		<div className='relative flex items-center justify-center w-full'>
 			<img
 				src={src}
 				alt={alt}

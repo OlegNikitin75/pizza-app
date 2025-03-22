@@ -7,7 +7,7 @@ import {
 } from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'
 
-export const Home = async () => {
+const Home = async () => {
 	const categories = await prisma.category.findMany({
 		include: { products: { include: { ingredients: true, items: true } } }
 	})

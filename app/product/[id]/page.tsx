@@ -1,4 +1,9 @@
-import { Container, H3, ProductImage } from '@/components/shared'
+import {
+	Container,
+	H3,
+	ProductImage,
+	VariantsSelector
+} from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'
 import { notFound } from 'next/navigation'
 import { FC } from 'react'
@@ -21,8 +26,16 @@ const ProductPage: FC<IProductPageProps> = async ({ params }) => {
 		<Container className='flex flex-col my-10'>
 			<div className='flex flex-1'>
 				<ProductImage src={product.imageUrl} alt={product.name} size={40} />
-				<div className='bg-app-line-gray max-w-[500px] w-full'>
+				<div className='bg-app-bg-gray max-w-[500px] w-full'>
 					<H3>{product.name}</H3>
+					<VariantsSelector
+						items={[
+							{ name: 'Маленькая', value: '1' },
+							{ name: 'Средняя', value: '2' },
+							{ name: 'Большая', value: '3',disabled: true }
+						]}
+						selectedValue='2'
+					/>
 				</div>
 			</div>
 		</Container>
