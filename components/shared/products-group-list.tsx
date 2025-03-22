@@ -40,7 +40,7 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 			<H2 className='mb-4'>{title}</H2>
 			<div
 				className={clsx(
-					'flex flex-wrap gap-4 justify-between sm:justify-start',
+					'flex flex-wrap gap-4 justify-between',
 					listClassName
 				)}
 			>
