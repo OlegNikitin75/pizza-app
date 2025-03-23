@@ -1,15 +1,15 @@
 import { cn } from '@/lib/utils'
 import { FC } from 'react'
 
-interface IProductImageProps {
+interface IPizzaImageProps {
 	src: string
 	alt: string
-	size: number
+	size: 20 | 30 | 40
 }
 
-export const ProductImage: FC<IProductImageProps> = ({ src, alt, size }) => {
+export const PizzaImage: FC<IPizzaImageProps> = ({ src, alt, size }) => {
 	return (
-		<div className='relative flex items-center justify-center w-full'>
+		<div className='relative flex items-center justify-center flex-1'>
 			<img
 				src={src}
 				alt={alt}

@@ -11,7 +11,6 @@ import { CheckboxFiltersGroup, H3, RangeSlider } from '.'
 import { Button, Input } from '../ui'
 
 export const Filters = () => {
-	const router = useRouter()
 
 	const { ingredients } = useIngredients()
 
