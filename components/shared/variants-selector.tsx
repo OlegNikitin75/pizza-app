@@ -22,7 +22,6 @@ export const VariantsSelector: FC<IVariantsSelectorProps> = ({
 	className,
 	value
 }) => {
-	console.log(value)
 	return (
 		<div
 			className={cn(

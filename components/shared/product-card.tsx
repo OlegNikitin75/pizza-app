@@ -55,14 +55,10 @@ export const ProductCard: FC<IProductCardProps> = ({
 						{imageUrl.includes('pizza') ? (
 							<>
 								<span className='pr-2'>от</span>
-								<span className=' text-base sm:text-xl font-bold'>
-									{price} р.
-								</span>
+								<span className='font-bold'>{price} руб.</span>
 							</>
 						) : (
-							<span className=' text-base sm:text-xl font-bold'>
-								{price} р.
-							</span>
+							<span className='font-bold'>{price} руб.</span>
 						)}
 					</span>
 				</div>

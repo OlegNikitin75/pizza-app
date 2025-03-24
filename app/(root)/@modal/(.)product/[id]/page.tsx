@@ -10,6 +10,7 @@ interface IProductPageProps {
 }
 
 const ProductModalPage: FC<IProductPageProps> = async ({ params }) => {
+	const ingredients = await prisma.ingredient.findMany({})
 	const product = await prisma.product.findUnique({
 		where: {
 			id: Number(params.id)
@@ -23,6 +24,6 @@ const ProductModalPage: FC<IProductPageProps> = async ({ params }) => {
 		return notFound()
 	}
 
-	return <ProductModal product={product} />
+	return <ProductModal product={product} ingredients={ingredients} />
 }
 export default ProductModalPage
