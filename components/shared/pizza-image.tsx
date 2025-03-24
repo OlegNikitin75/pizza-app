@@ -14,11 +14,11 @@ export const PizzaImage: FC<IPizzaImageProps> = ({ src, alt, size }) => {
 				src={src}
 				alt={alt}
 				className={cn(
-					'relative left-2 top-2 transition-all z-10 duration-300',
+					'relative left-1 top-1 transition-all z-10 duration-300',
 					{
 						'w-[180px] h-[180px] sm:w-[300px] sm:h-[300px]': size === 20,
-						'w-[280px] h-[280px] sm:w-[400px] sm:h-[400px]': size === 30,
-						'w-[380px] h-[380px] sm:w-[500px] sm:h-[500px]': size === 40
+						'w-[280px] h-[280px] sm:w-[380px] sm:h-[380px]': size === 30,
+						'w-[380px] h-[380px] sm:w-[460px] sm:h-[460px]': size === 40
 					}
 				)}
 			/>

@@ -2,7 +2,6 @@ import {
 	Container,
 	Filters,
 	ProductsGroupList,
-	SortPopup,
 	TopBar
 } from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'

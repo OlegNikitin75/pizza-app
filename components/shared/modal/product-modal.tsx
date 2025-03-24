@@ -23,15 +23,13 @@ export const ProductModal: FC<IProductModalProps> = ({ product }) => {
 					<PizzaForm
 						imageUrl={product.imageUrl}
 						name={product.name}
-						ingredients={undefined}
+						ingredients={product.ingredients}
 						items={undefined}
 					/>
 					:
 					<ProductForm
 						imageUrl={product.imageUrl}
 						name={product.name}
-						ingredients={undefined}
-						items={undefined}
 					/>
 				}
 			

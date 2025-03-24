@@ -1,21 +1,17 @@
 import { FC } from 'react'
 
-import { H3, P, ProductImage } from '.'
+import { H3, P } from '.'
 import { Button } from '../ui'
 
 interface IProductForm {
 	imageUrl: string
 	name: string
-	ingredients: any
-	items: any
 	onClickAdd?: VoidFunction
 }
 
 export const ProductForm: FC<IProductForm> = ({
 	imageUrl,
 	name,
-	ingredients,
-	items,
 	onClickAdd
 }) => {
 	const textDetails = '30 см, традиционное тесто, 590 г.'

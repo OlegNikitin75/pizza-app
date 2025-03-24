@@ -1,4 +1,5 @@
 'use client'
+
 import { cn } from '@/lib/utils'
 import { FC } from 'react'
 
@@ -12,20 +13,21 @@ interface IVariantsSelectorProps {
 	items: readonly Variant[]
 	onClick?: (value: Variant['value']) => void
 	className?: string
-	selectedValue?: Variant['value']
+	value?: Variant['value']
 }
 
 export const VariantsSelector: FC<IVariantsSelectorProps> = ({
 	items,
 	onClick,
 	className,
-	selectedValue
+	value
 }) => {
+	console.log(value)
 	return (
 		<div
 			className={cn(
 				className,
-				'flex justify-between select-none rounded-md p-1 bg-app-line-gray'
+				'flex justify-between select-none rounded-md p-1 gap-4'
 			)}
 		>
 			{items.map(item => (
@@ -33,9 +35,9 @@ export const VariantsSelector: FC<IVariantsSelectorProps> = ({
 					key={item.value}
 					onClick={() => onClick?.(item.value)}
 					className={cn(
-						'flex items-center justify-center rounded-md p-1 text-app-black text-sm cursor-pointe px-5 bg-white/50',
+						'flex-1 rounded-md py-2 text-app-black text-sm cursor-pointe bg-white/50',
 						{
-							'bg-white shadow ': item.value === selectedValue,
+							'bg-white shadow ': item.value === value,
 							'text-app-gray-text opacity-50 pointer-events-none': item.disabled
 						}
 					)}
