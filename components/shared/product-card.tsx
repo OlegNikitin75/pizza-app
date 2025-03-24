@@ -34,11 +34,11 @@ export const ProductCard: FC<IProductCardProps> = ({
 	return (
 		<Link
 			className='rounded-xl bg-white p-2 w-full sm:h-[414px]
-			 sm:w-56 inline-flex justify-between flex-col '
+			 sm:w-56 inline-flex justify-between flex-col items-center'
 			href={`/product/${id}`}
 		>
 			<img width={300} height={300} src={imageUrl} alt={name} />
-			<div className='flex-1 p-3 flex flex-col justify-between '>
+			<div className='flex-1 p-3 flex flex-col justify-between w-full'>
 				<div>
 					<H3>{name}</H3>
 					<P>{getIngredientsList()}</P>

@@ -22,7 +22,7 @@ export const PizzaIngredient: FC<IIngredientProps> = ({
 	return (
 		<div
 			className={cn(
-				'relative flex items-center flex-col justify-between p-1 rounded-md w-32 cursor-pointer shadow-md bg-white',
+				'relative flex items-center flex-col justify-between p-1 rounded-md  flex-grow cursor-pointer shadow-md bg-white',
 				{ 'border border-app-primary': active },
 				className
 			)}

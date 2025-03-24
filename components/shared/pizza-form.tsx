@@ -32,12 +32,12 @@ export const PizzaForm: FC<IProductForm> = ({
 	const [size, setSize] = useState<PizzaSize>(20)
 	const [type, setType] = useState<PizzaType>(1)
 	return (
-		<div className='flex justify-between'>
-			<PizzaImage src={imageUrl} alt={name} size={size} />
+		<div className='flex justify-between flex-col md:flex-row'>
+			<PizzaImage src={imageUrl} alt={name} size={size}                      />
 			<div className='flex-1 bg-app-line-gray p-6'>
 				<H3>{name}</H3>
 				<P>{textDetails}</P>
-				<div className='space-y-3'>
+				<div className='space-y-1 md:space-y-3'>
 					<VariantsSelector
 						items={pizzaSizesOptions}
 						value={String(size)}
@@ -49,7 +49,7 @@ export const PizzaForm: FC<IProductForm> = ({
 						onClick={value => setType(Number(value) as PizzaType)}
 					/>
 				</div>
-				<div className='rounded-md bg-white p-5 shadow-md h-80 mt-4 overflow-auto scrollbar'>
+				<div className='rounded-md bg-white p-2 md:p-5 shadow-md h-40 md:h-80 mt-2 sm:mt-4 overflow-auto scrollbar'>
 					<div className='flex flex-wrap gap-4 justify-center'>
 						{ingredients.map(ingredient => (
 							<PizzaIngredient

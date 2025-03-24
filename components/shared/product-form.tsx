@@ -16,7 +16,7 @@ export const ProductForm: FC<IProductForm> = ({
 }) => {
 	const textDetails = '30 см, традиционное тесто, 590 г.'
 	return (
-		<div className='flex justify-between'>
+		<div className='flex justify-between flex-col md:flex-row'>
 			<div className='flex justify-center items-center relative flex-1 w-full'>
 				<img className='relative left-2 top-2 transition-all duration-300 z-10 h-80 w-80' src={imageUrl} alt={name} />
 			</div>
