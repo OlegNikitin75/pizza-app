@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { FC, useEffect, useRef } from 'react'
 import { useIntersection } from 'react-use'
 
-import { H2 } from '.'
+import {  H2 } from '.'
 import { ProductCard } from './product-card'
 
 interface IProductsGroupListProps {
@@ -36,11 +36,13 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 	}, [categoryId, intersection?.isIntersecting, setActiveCategoryId])
 
 	return (
-		<div id={title} ref={intersectionRef}>
+		<div id={title} ref={intersectionRef} className='mt-5'>
+		
 			<H2 className='mb-4'>{title}</H2>
+
 			<div
 				className={clsx(
-					'flex flex-wrap gap-4 justify-between md:justify-start',
+					'flex flex-wrap gap-4 justify-center',
 					listClassName
 				)}
 			>

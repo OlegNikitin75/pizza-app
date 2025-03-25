@@ -30,10 +30,7 @@ const Home = async () => {
 								)
 						)}
 					</div>
-					<div className='flex shrink-0 basis-1/4 flex-col gap-y-8'>
-					
-						<Filters />
-					</div>
+				
 				</div>
 			</Container>
 		</>

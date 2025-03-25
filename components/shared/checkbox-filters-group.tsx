@@ -1,5 +1,6 @@
 'use client'
 
+import { cn } from '@/lib/utils'
 import { ChangeEvent, FC, useState } from 'react'
 
 import { Input } from '../ui'
@@ -20,27 +21,24 @@ interface ICheckboxFiltersGroupProps {
 export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 	items,
 	defaultItems,
-	limit = 5,
 	searchInputPlaceholder = 'Поиск...',
 	onClickCheckbox,
 	selected,
 	name
 }) => {
-	const [openAll, setOpenAll] = useState(false)
 	const [searchValue, setSearchValue] = useState('')
-	const listItems = openAll
-		? items.filter(item =>
-				item.text.toLowerCase().includes(searchValue.toLowerCase())
-			)
-		: (defaultItems || items).slice(0, limit)
+	const listItems = items.filter(item =>
+		item.text.toLowerCase().includes(searchValue.toLowerCase())
+	)
+
 	const setSearchInputValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(event.target.value)
 	}
 
 	return (
-		<div className='space-y-5'>
-			{openAll && (
-				<div>
+		<div className='py-2 sm:py-0'>
+			{items.length > 5 && (
+				<div className='mb-4'>
 					<Input
 						onChange={setSearchInputValue}
 						placeholder={searchInputPlaceholder}
@@ -48,28 +46,27 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 					/>
 				</div>
 			)}
-
-			<div className='flex flex-col max-h-80 overflow-auto scrollbar gap-y-4 pr-2'>
-				{listItems.map(item => (
-					<FilterCheckbox
-						key={String(item.value)}
-						text={item.text}
-						onCheckedChange={() => onClickCheckbox?.(item.value)}
-						checked={selected?.has(item.value)}
-						value={item.value}
-						endAdornment={item.endAdornment}
-						name={name}
-					/>
-				))}
+			<div
+				className={cn('space-y-5', {
+					'h-40 md:h-80 overflow-y-scroll scrollbar': items.length > 5
+				})}
+			>
+				<div className={cn('flex flex-row gap-4 md:flex-col gap-y-4 pr-2',{
+					'flex-col': items.length > 5
+				})}>
+					{listItems.map(item => (
+						<FilterCheckbox
+							key={String(item.value)}
+							text={item.text}
+							onCheckedChange={() => onClickCheckbox?.(item.value)}
+							checked={selected?.has(item.value)}
+							value={item.value}
+							endAdornment={item.endAdornment}
+							name={name}
+						/>
+					))}
+				</div>
 			</div>
-			{items.length > limit && (
-				<button
-					onClick={() => setOpenAll(!openAll)}
-					className='text-app-primary font-semibold py-2'
-				>
-					{openAll ? '- скрыть все' : '+ показать все'}
-				</button>
-			)}
 		</div>
 	)
 }

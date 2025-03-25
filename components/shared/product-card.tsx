@@ -28,8 +28,8 @@ export const ProductCard: FC<IProductCardProps> = ({
 
 	return (
 		<Link
-			className='rounded-xl bg-white p-2 w-full sm:h-[414px]
-			 sm:w-56 inline-flex justify-between flex-col items-center'
+			className='rounded-xl bg-white p-2 w-full sm:h-[414px] sm:w-[234px]
+			 2xl:w-[246px] inline-flex justify-between flex-col items-center'
 			href={`/product/${id}`}
 		>
 			<img width={300} height={300} src={imageUrl} alt={name} />
