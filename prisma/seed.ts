@@ -20,7 +20,6 @@ const generateProductItem = ({
 	price: number
 }) => {
 	return {
-		
 		productId,
 		price,
 		pizzaType,
@@ -234,8 +233,21 @@ async function up() {
 				productId: pizza1.id,
 				pizzaType: 1,
 				size: 20,
-				price: 24.99
+				price: 21.99
 			}),
+			generateProductItem({
+				productId: pizza1.id,
+				pizzaType: 1,
+				size: 30,
+				price: 26.99
+			}),
+			generateProductItem({
+				productId: pizza1.id,
+				pizzaType: 1,
+				size: 40,
+				price: 29.99
+			}),
+
 			generateProductItem({
 				productId: pizza1.id,
 				pizzaType: 2,
@@ -271,12 +283,6 @@ async function up() {
 			generateProductItem({
 				productId: pizza2.id,
 				pizzaType: 2,
-				size: 20,
-				price: 23.99
-			}),
-			generateProductItem({
-				productId: pizza2.id,
-				pizzaType: 2,
 				size: 30,
 				price: 30.99
 			}),
@@ -292,7 +298,19 @@ async function up() {
 				productId: pizza3.id,
 				pizzaType: 1,
 				size: 20,
-				price: 21.99
+				price: 22.99
+			}),
+			generateProductItem({
+				productId: pizza3.id,
+				pizzaType: 1,
+				size: 30,
+				price: 28.99
+			}),
+			generateProductItem({
+				productId: pizza3.id,
+				pizzaType: 1,
+				size: 40,
+				price: 35.99
 			}),
 			generateProductItem({
 				productId: pizza3.id,
@@ -316,6 +334,18 @@ async function up() {
 			}),
 			generateProductItem({
 				productId: pizza4.id,
+				pizzaType: 1,
+				size: 30,
+				price: 28.99
+			}),
+			generateProductItem({
+				productId: pizza4.id,
+				pizzaType: 1,
+				size: 40,
+				price: 38.99
+			}),
+			generateProductItem({
+				productId: pizza4.id,
 				pizzaType: 2,
 				size: 30,
 				price: 28.99
@@ -336,6 +366,18 @@ async function up() {
 			}),
 			generateProductItem({
 				productId: pizza5.id,
+				pizzaType: 1,
+				size: 30,
+				price: 27.99
+			}),
+			generateProductItem({
+				productId: pizza5.id,
+				pizzaType: 1,
+				size: 40,
+				price: 35.99
+			}),
+			generateProductItem({
+				productId: pizza5.id,
 				pizzaType: 2,
 				size: 30,
 				price: 27.99
@@ -346,6 +388,7 @@ async function up() {
 				size: 40,
 				price: 35.99
 			}),
+
 			// Пицца "Барбекю"
 			generateProductItem({
 				productId: pizza6.id,
@@ -364,12 +407,6 @@ async function up() {
 				pizzaType: 1,
 				size: 40,
 				price: 34.99
-			}),
-			generateProductItem({
-				productId: pizza6.id,
-				pizzaType: 2,
-				size: 20,
-				price: 21.99
 			}),
 			generateProductItem({
 				productId: pizza6.id,
@@ -403,13 +440,38 @@ async function up() {
 				size: 40,
 				price: 29.99
 			}),
+			generateProductItem({
+				productId: pizza7.id,
+				pizzaType: 2,
+				size: 30,
+				price: 16.99
+			}),
+			generateProductItem({
+				productId: pizza7.id,
+				pizzaType: 2,
+				size: 40,
+				price: 29.99
+			}),
 
 			// Пицца "Чеддерони"
+
 			generateProductItem({
 				productId: pizza8.id,
 				pizzaType: 1,
 				size: 20,
 				price: 21.99
+			}),
+			generateProductItem({
+				productId: pizza8.id,
+				pizzaType: 1,
+				size: 30,
+				price: 28.99
+			}),
+			generateProductItem({
+				productId: pizza8.id,
+				pizzaType: 1,
+				size: 40,
+				price: 35.99
 			}),
 			generateProductItem({
 				productId: pizza8.id,
@@ -427,9 +489,21 @@ async function up() {
 			// Пицца "Фермерская"
 			generateProductItem({
 				productId: pizza9.id,
-				pizzaType: 2,
+				pizzaType: 1,
 				size: 20,
 				price: 17.99
+			}),
+			generateProductItem({
+				productId: pizza9.id,
+				pizzaType: 1,
+				size: 30,
+				price: 26.99
+			}),
+			generateProductItem({
+				productId: pizza9.id,
+				pizzaType: 1,
+				size: 40,
+				price: 32.99
 			}),
 			generateProductItem({
 				productId: pizza9.id,
@@ -445,11 +519,24 @@ async function up() {
 			}),
 
 			// Пицца "4 сезона"
+
 			generateProductItem({
 				productId: pizza10.id,
-				pizzaType: 2,
+				pizzaType: 1,
 				size: 20,
 				price: 31.99
+			}),
+			generateProductItem({
+				productId: pizza10.id,
+				pizzaType: 1,
+				size: 30,
+				price: 34.99
+			}),
+			generateProductItem({
+				productId: pizza10.id,
+				pizzaType: 1,
+				size: 40,
+				price: 38.99
 			}),
 			generateProductItem({
 				productId: pizza10.id,
@@ -501,7 +588,7 @@ async function up() {
 			generateProductItem({ productId: 29, price: 1.29 }),
 			generateProductItem({ productId: 30, price: 1.29 }),
 			generateProductItem({ productId: 31, price: 1.29 }),
-			generateProductItem({ productId: 32, price: 1.29 }),
+			generateProductItem({ productId: 32, price: 1.29 })
 		]
 	})
 

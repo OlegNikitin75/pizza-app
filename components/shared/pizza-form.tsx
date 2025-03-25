@@ -7,6 +7,7 @@ import {
 	PizzaType,
 	pizzaTypesOptions
 } from '@/constants/pizza'
+import { getIngredientsList } from '@/lib/get-ingredients-list'
 import { Ingredient, ProductItem } from '@prisma/client'
 import { FC, useEffect, useState } from 'react'
 import { useSet } from 'react-use'
@@ -17,7 +18,8 @@ import { Button } from '../ui'
 interface IProductForm {
 	imageUrl: string
 	name: string
-	ingredients: Ingredient[]
+	pizzaIngredients: Ingredient[]
+	allIngredients: Ingredient[]
 	items: ProductItem[]
 	onClickAddToCart?: VoidFunction
 }
@@ -25,12 +27,13 @@ interface IProductForm {
 export const PizzaForm: FC<IProductForm> = ({
 	imageUrl,
 	name,
-	ingredients,
+	pizzaIngredients,
+	allIngredients,
 	items,
 	onClickAddToCart
 }) => {
-	const [size, setSize] = useState<PizzaSize>(20)
-	const [type, setType] = useState<PizzaType>(1)
+	const [size, setSize] = useState<PizzaSize>(30)
+	const [type, setType] = useState<PizzaType>(2)
 
 	const [selectedIngredients, { toggle: addIngredient }] = useSet(
 		new Set<number>([])
@@ -55,23 +58,19 @@ export const PizzaForm: FC<IProductForm> = ({
 			setSize(Number(availablePrimarySize.value) as PizzaSize)
 	}, [availablePizzaSizes, size])
 
-	const pizzaPrice =
-		items.find(item => item.pizzaType === type && item.size === size)?.price ||
-		0
-		
-	console.log(pizzaPrice)
+	const pizzaPrice = items.find(item => item.size === size)?.price || 0
 
-	const totalIngredientsPrice = ingredients
+	const totalIngredientsPrice = allIngredients
 		.filter(ingredient => selectedIngredients.has(ingredient.id))
 		.reduce((acc, ingredient) => acc + ingredient.price, 0)
 
-	const totalPizzaPrice = pizzaPrice + totalIngredientsPrice
+	const totalPizzaPrice = (pizzaPrice + totalIngredientsPrice).toFixed(2)
 
 	const handleClick = () => {
 		onClickAddToCart?.()
 	}
 	const textDetails = `${size} см, ${mapPizzaType[type]} тесто`
-
+	console.log(items)
 	return (
 		<div className='flex justify-between flex-col md:flex-row'>
 			<PizzaImage src={imageUrl} alt={name} size={size} />
@@ -80,6 +79,7 @@ export const PizzaForm: FC<IProductForm> = ({
 				<P className='text-base text-app-gray-text font-semibold'>
 					{textDetails}
 				</P>
+				<P className='md:text-sm text-app-gray-text'>{getIngredientsList(pizzaIngredients)}</P>
 				<div className='space-y-1 md:space-y-3'>
 					<VariantsSelector
 						items={availablePizzaSizes}
@@ -93,9 +93,9 @@ export const PizzaForm: FC<IProductForm> = ({
 					/>
 				</div>
 				<H3 className='mt-2'>Добавить по вкусу</H3>
-				<div className='rounded-md bg-white p-2 md:p-5 shadow-md h-44 md:h-80 mt-2  overflow-auto scrollbar'>
+				<div className='rounded-md bg-white p-2 md:p-5 shadow-md h-44 md:h-[260px] 2xl:h-80 mt-2  overflow-auto scrollbar'>
 					<div className='flex flex-wrap gap-4 justify-center'>
-						{ingredients.map(ingredient => (
+						{allIngredients.map(ingredient => (
 							<PizzaIngredient
 								key={ingredient.id}
 								imageUrl={ingredient.imageUrl}
@@ -108,18 +108,13 @@ export const PizzaForm: FC<IProductForm> = ({
 					</div>
 				</div>
 
-				<div className='space-y-4'>
-					<P className='mt-10'>
-						Итоговая стоимость:{' '}
-						<span className='font-bold text-lg'>{totalPizzaPrice} руб.</span>
-					</P>
-					<Button
-						onClick={handleClick}
-						className='bg-app-primary h-11 px-10 rounded-md w-full text-white'
-					>
-						Добавить в корзину
-					</Button>
-				</div>
+				<Button
+					onClick={handleClick}
+					className='bg-app-primary h-11 px-10 rounded-md w-full text-white mt-10'
+				>
+					Добавить в корзину за{' '}
+					<span className='px-2 text-lg font-bold'>{totalPizzaPrice}</span> руб.
+				</Button>
 			</div>
 		</div>
 	)

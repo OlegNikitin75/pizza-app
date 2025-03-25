@@ -11,12 +11,12 @@ import { PizzaForm, ProductForm } from '..'
 
 interface IProductModalProps {
 	product: ProductWithRelations
-	ingredients: Ingredient[]
+	allIngredients: Ingredient[]
 }
 
 export const ProductModal: FC<IProductModalProps> = ({
 	product,
-	ingredients
+	allIngredients
 }) => {
 	const router = useRouter()
 	const isPizza = Boolean(product.items[0].pizzaType)
@@ -27,7 +27,8 @@ export const ProductModal: FC<IProductModalProps> = ({
 					<PizzaForm
 						imageUrl={product.imageUrl}
 						name={product.name}
-						ingredients={ingredients}
+						allIngredients={allIngredients}
+						pizzaIngredients={product.ingredients}
 						items={product.items}
 					/>
 				) : (

@@ -5,6 +5,7 @@ import { FC } from 'react'
 
 import { H3, P } from '.'
 import { Button } from '../ui'
+import { getIngredientsList } from '@/lib/get-ingredients-list'
 
 interface IProductCardProps {
 	id: number
@@ -23,13 +24,7 @@ export const ProductCard: FC<IProductCardProps> = ({
 	ingredients,
 	className
 }) => {
-	const getIngredientsList = () => {
-		let str = ''
-		ingredients.forEach(ingredient => {
-			str += ingredient.name + ', '
-		})
-		return str.slice(0, -2)
-	}
+
 
 	return (
 		<Link
@@ -41,7 +36,7 @@ export const ProductCard: FC<IProductCardProps> = ({
 			<div className='flex-1 p-3 flex flex-col justify-between w-full'>
 				<div>
 					<H3>{name}</H3>
-					<P>{getIngredientsList()}</P>
+					<P>{getIngredientsList(ingredients)}</P>
 				</div>
 
 				<div className='flex justify-between items-center mt-4'>

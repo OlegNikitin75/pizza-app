@@ -24,6 +24,6 @@ const ProductModalPage: FC<IProductPageProps> = async ({ params }) => {
 		return notFound()
 	}
 
-	return <ProductModal product={product} ingredients={ingredients} />
+	return <ProductModal product={product} allIngredients={ingredients} />
 }
-export default ProductModalPage
+export default ProductModalPage  
