@@ -2,7 +2,7 @@
 
 import { ProductWithRelations } from '@/@types/prisma'
 import { Dialog } from '@/components/ui'
-import { DialogContent } from '@/components/ui/dialog'
+import { DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { Ingredient } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
@@ -23,6 +23,7 @@ export const ProductModal: FC<IProductModalProps> = ({
 	return (
 		<Dialog open={Boolean(product)} onOpenChange={() => router.back()}>
 			<DialogContent className='w-full max-w-[1060px] min-h-[500px] bg-white overflow-hidden'>
+				<DialogTitle className='hidden'>{product.name}</DialogTitle>
 				{isPizza ? (
 					<PizzaForm
 						imageUrl={product.imageUrl}

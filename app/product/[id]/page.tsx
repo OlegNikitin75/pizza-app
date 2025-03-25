@@ -1,7 +1,9 @@
 import {
 	Container,
 	H3,
-	ProductImage,
+	
+	PizzaImage,
+	
 	VariantsSelector
 } from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'
@@ -25,7 +27,7 @@ const ProductPage: FC<IProductPageProps> = async ({ params }) => {
 	return (
 		<Container className='flex flex-col my-10'>
 			<div className='flex flex-1'>
-				<ProductImage src={product.imageUrl} alt={product.name} size={40} />
+				<PizzaImage src={product.imageUrl} alt={product.name} size={40} />
 				<div className='bg-app-bg-gray max-w-[500px] w-full'>
 					<H3>{product.name}</H3>
 					<VariantsSelector

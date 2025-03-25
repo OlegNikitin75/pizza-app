@@ -79,7 +79,9 @@ export const PizzaForm: FC<IProductForm> = ({
 				<P className='text-base text-app-gray-text font-semibold'>
 					{textDetails}
 				</P>
-				<P className='md:text-sm text-app-gray-text'>{getIngredientsList(pizzaIngredients)}</P>
+				<P className='md:text-sm text-app-gray-text'>
+					{getIngredientsList(pizzaIngredients)}
+				</P>
 				<div className='space-y-1 md:space-y-3'>
 					<VariantsSelector
 						items={availablePizzaSizes}
@@ -93,7 +95,7 @@ export const PizzaForm: FC<IProductForm> = ({
 					/>
 				</div>
 				<H3 className='mt-2'>Добавить по вкусу</H3>
-				<div className='rounded-md bg-white p-2 md:p-5 shadow-md h-44 md:h-[260px] 2xl:h-80 mt-2  overflow-auto scrollbar'>
+				<div className='rounded-md bg-white p-2 md:p-5 shadow-md h-44 md:h-[260px] 2xl:h-80 mt-2 overflow-auto scrollbar'>
 					<div className='flex flex-wrap gap-4 justify-center'>
 						{allIngredients.map(ingredient => (
 							<PizzaIngredient

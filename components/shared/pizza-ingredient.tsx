@@ -23,7 +23,7 @@ export const PizzaIngredient: FC<IIngredientProps> = ({
 		<div
 			onClick={onClick}
 			className={cn(
-				'relative flex items-center flex-col justify-between p-1 rounded-md  flex-grow cursor-pointer shadow-md bg-white opacity-60 hover:opacity-100 border border-white',
+				'relative flex items-center flex-col justify-between p-1 rounded-md  flex-grow cursor-pointer shadow-md bg-white opacity-70 duration-300 hover:opacity-100 border border-white',
 				{  'border-app-primary opacity-100': active },
 				className
 			)}
