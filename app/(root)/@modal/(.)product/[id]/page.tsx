@@ -1,21 +1,16 @@
 import { ProductModal } from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'
 import { notFound } from 'next/navigation'
-import React from 'react'
-import { FC } from 'react'
 
-interface IProductPageProps {
-	params: {
-		id: string
-	}
-}
+type Params = Promise<{ id: string }>
 
-const ProductModalPage: FC<IProductPageProps> = async ({ params }) => {
+const ProductModalPage = async ({ params }: { params: Params }) => {
+	const { id } = await params
 
 	const ingredients = await prisma.ingredient.findMany({})
 	const product = await prisma.product.findUnique({
 		where: {
-			id: Number(params.id)
+			id: Number(id)
 		},
 		include: {
 			ingredients: true,
@@ -28,4 +23,4 @@ const ProductModalPage: FC<IProductPageProps> = async ({ params }) => {
 
 	return <ProductModal product={product} allIngredients={ingredients} />
 }
-export default ProductModalPage  
+export default ProductModalPage

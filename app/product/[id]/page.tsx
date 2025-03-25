@@ -1,25 +1,19 @@
 import {
 	Container,
 	H3,
-	
 	PizzaImage,
-	
 	VariantsSelector
 } from '@/components/shared'
 import { prisma } from '@/prisma/prisma-client'
 import { notFound } from 'next/navigation'
-import { FC } from 'react'
 
-interface IProductPageProps {
-	params: {
-		id: string
-	}
-}
+type Params = Promise<{ id: string }>
 
-const ProductPage: FC<IProductPageProps> = async ({ params }) => {
+const ProductPage = async ({ params }: { params: Params }) => {
+	const { id } = await params
 	const product = await prisma.product.findUnique({
 		where: {
-			id: Number(params.id)
+			id: Number(id)
 		}
 	})
 	if (!product) return notFound()
@@ -34,7 +28,7 @@ const ProductPage: FC<IProductPageProps> = async ({ params }) => {
 						items={[
 							{ name: 'Маленькая', value: '1' },
 							{ name: 'Средняя', value: '2' },
-							{ name: 'Большая', value: '3',disabled: true }
+							{ name: 'Большая', value: '3', disabled: true }
 						]}
 						selectedValue='2'
 					/>
