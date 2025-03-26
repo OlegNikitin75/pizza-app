@@ -1,7 +1,7 @@
 'use client'
 
 import { CATEGORIES } from '@/constants/categories'
-import { useCategoryStore } from '@/store/category-store'
+import { useCategoryStore } from '@/store'
 
 export const Categories = () => {
 	const categoryActiveId = useCategoryStore(state => state.activeId)

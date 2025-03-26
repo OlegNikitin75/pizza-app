@@ -1,3 +1,4 @@
+import { CartDrawerItem } from './cart-drawer-item';
 import { CountIconButton } from './count-icon-button';
 import { CountButton } from './count-button';
 import { CartDrawer } from './cart-drawer';
@@ -24,5 +25,6 @@ export {PizzaIngredient} from './pizza-ingredient'
 export {FiltersDrawer} from './filters-drawer'
 export {CartButton} from './cart-button'
 export {CartDrawer} from './cart-drawer'
+export {CartDrawerItem} from './cart-drawer-item'
 export {CountButton} from './count-button'
 export {CountIconButton} from './count-icon-button'

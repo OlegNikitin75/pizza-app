@@ -1,7 +1,12 @@
+'use client'
+
+import { PizzaSize, PizzaType } from '@/constants/pizza'
+import { getCartItemDetails } from '@/lib'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { FC, PropsWithChildren } from 'react'
+import { FC, PropsWithChildren} from 'react'
 
+import { CartDrawerItem } from '.'
 import {
 	Button,
 	Sheet,
@@ -12,8 +17,15 @@ import {
 	SheetTitle,
 	SheetTrigger
 } from '../ui'
+import { useCart } from '@/hooks'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
+	
+	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
+	console.log(items)
+
+
+
 	return (
 		<Sheet>
 			<SheetTrigger asChild>{children}</SheetTrigger>
@@ -25,6 +37,25 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 					</SheetTitle>
 					<SheetDescription>Все товары в корзине</SheetDescription>
 				</SheetHeader>
+				<div className='-mx-6 overflow-auto flex-1 mt-5'>
+					<div className='mb-2'>
+						{items.map(item => (
+							<CartDrawerItem
+								key={item.id}
+								id={item.id}
+								imageUrl={item.imageUrl}
+								details={getCartItemDetails(
+									item.ingredients,
+									item.pizzaType as PizzaType,
+									item.pizzaSize as PizzaSize
+								)}
+								name={item.name}
+								price={item.price}
+								quantity={item.quantity}
+							/>
+						))}
+					</div>
+				</div>
 
 				<SheetFooter className='-mx-6 bg-white p-8'>
 					<div className='w-full'>
@@ -33,7 +64,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 								{' '}
 								Итого:
 							</span>
-							<span className='font-bold text-lg'>60 руб.</span>
+							<span className='font-bold text-lg'>{totalAmount} руб.</span>
 						</div>
 						<Link href='/cart'>
 							<Button
