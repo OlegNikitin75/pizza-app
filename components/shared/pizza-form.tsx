@@ -3,11 +3,14 @@
 import {
 	mapPizzaType,
 	PizzaSize,
-	pizzaSizesOptions,
 	PizzaType,
 	pizzaTypesOptions
 } from '@/constants/pizza'
-import { getIngredientsList } from '@/lib/get-ingredients-list'
+import {
+	getAvailablePizzaSizes,
+	getIngredientsList,
+	pizzaCostCalculation
+} from '@/lib'
 import { Ingredient, ProductItem } from '@prisma/client'
 import { FC, useEffect, useState } from 'react'
 import { useSet } from 'react-use'
@@ -38,15 +41,15 @@ export const PizzaForm: FC<IProductForm> = ({
 	const [selectedIngredients, { toggle: addIngredient }] = useSet(
 		new Set<number>([])
 	)
+	const availablePizzaSizes = getAvailablePizzaSizes(items, type)
 
-	const availablePizzas = items.filter(item => item.pizzaType !== type)
-	const availablePizzaSizes = pizzaSizesOptions.map(item => ({
-		name: item.name,
-		value: item.value,
-		disabled: !availablePizzas.some(
-			pizza => Number(pizza.size) === Number(item.value)
-		)
-	}))
+	const totalPizzaPrice = pizzaCostCalculation(
+		items,
+		size,
+		allIngredients,
+		selectedIngredients
+	)
+
 	useEffect(() => {
 		const isAvailableSize = availablePizzaSizes?.find(
 			item => Number(item.value) === size && !item.disabled
@@ -58,19 +61,10 @@ export const PizzaForm: FC<IProductForm> = ({
 			setSize(Number(availablePrimarySize.value) as PizzaSize)
 	}, [availablePizzaSizes, size])
 
-	const pizzaPrice = items.find(item => item.size === size)?.price || 0
-
-	const totalIngredientsPrice = allIngredients
-		.filter(ingredient => selectedIngredients.has(ingredient.id))
-		.reduce((acc, ingredient) => acc + ingredient.price, 0)
-
-	const totalPizzaPrice = (pizzaPrice + totalIngredientsPrice).toFixed(2)
-
 	const handleClick = () => {
 		onClickAddToCart?.()
 	}
 	const textDetails = `${size} см, ${mapPizzaType[type]} тесто`
-	console.log(items)
 	return (
 		<div className='flex justify-between flex-col md:flex-row'>
 			<PizzaImage src={imageUrl} alt={name} size={size} />

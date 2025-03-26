@@ -3,13 +3,12 @@
 import { useFiltersState } from '@/hooks/use-filters-state'
 import { useIngredients } from '@/hooks/use-ingredients'
 import { useQueryFilters } from '@/hooks/use-query-filters'
-import { useState } from 'react'
 
 import { CheckboxFiltersGroup, H3, RangeSlider } from '.'
 import { Input } from '../ui'
 
 export const Filters = () => {
-	const { ingredients } = useIngredients()
+	const { ingredients, loading } = useIngredients()
 
 	const filters = useFiltersState()
 	useQueryFilters(filters)
@@ -28,7 +27,7 @@ export const Filters = () => {
 		<div>
 			<div className='md:mt-5 flex flex-col justify-between gap-y-4'>
 				<div className=' w-[95%]'>
-				<H3 className='mb-2'>Цена от и до:</H3>
+					<H3 className='mb-2'>Цена от и до:</H3>
 					<div className='flex justify-between gap-x-4 mb-2'>
 						<Input
 							type='number'
@@ -68,6 +67,7 @@ export const Filters = () => {
 						name='sizes'
 						onClickCheckbox={filters.setSizes}
 						selected={filters.sizes}
+						loading={loading}
 						items={[
 							{
 								text: '20 см',
@@ -90,6 +90,7 @@ export const Filters = () => {
 						name='types'
 						onClickCheckbox={filters.setTypes}
 						selected={filters.types}
+						loading={loading}
 						items={[
 							{
 								text: 'Тонкое',
@@ -109,6 +110,8 @@ export const Filters = () => {
 						onClickCheckbox={filters.setIngredients}
 						selected={filters.selectedIngredients}
 						name='ingredients'
+						loading={loading}
+						className='mt-5'
 					/>
 				</div>
 			</div>

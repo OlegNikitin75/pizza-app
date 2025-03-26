@@ -3,7 +3,7 @@
 import { cn } from '@/lib/utils'
 import { ChangeEvent, FC, useState } from 'react'
 
-import { Input } from '../ui'
+import { Input, Skeleton } from '../ui'
 import { FilterCheckbox, IFilterCheckboxProps } from './filter-checkbox'
 
 type Item = IFilterCheckboxProps
@@ -16,15 +16,18 @@ interface ICheckboxFiltersGroupProps {
 	onClickCheckbox?: (id: string) => void
 	selected?: Set<string>
 	name?: string
+	loading?: boolean
+	className?: string
 }
 
 export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 	items,
-	defaultItems,
 	searchInputPlaceholder = 'Поиск...',
 	onClickCheckbox,
 	selected,
-	name
+	name,
+	loading,
+	className
 }) => {
 	const [searchValue, setSearchValue] = useState('')
 	const listItems = items.filter(item =>
@@ -33,6 +36,19 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 
 	const setSearchInputValue = (event: ChangeEvent<HTMLInputElement>) => {
 		setSearchValue(event.target.value)
+	}
+
+	if (loading) {
+		return (
+			<div className={className}>
+				{...Array(items.length)
+					.fill(0)
+					.map((_, index) => (
+						<Skeleton key={index} className='h-6 mb-4 rounded-md bg-app-black/10' />
+					))}
+
+			</div>
+		)
 	}
 
 	return (
@@ -48,12 +64,14 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 			)}
 			<div
 				className={cn('space-y-5', {
-					'h-40 md:h-80 overflow-y-scroll scrollbar': items.length > 5
+					'h-36 2xl:h-80 overflow-y-scroll scrollbar': items.length > 5
 				})}
 			>
-				<div className={cn('flex flex-row gap-4 md:flex-col gap-y-4 pr-2',{
-					'flex-col': items.length > 5
-				})}>
+				<div
+					className={cn('flex flex-row gap-4 2xl:flex-col gap-y-4 pr-2', {
+						'flex-col': items.length > 5
+					})}
+				>
 					{listItems.map(item => (
 						<FilterCheckbox
 							key={String(item.value)}
