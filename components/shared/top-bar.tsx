@@ -1,4 +1,4 @@
-import { Categories, FiltersMenu, SortPopup } from '.'
+import { Categories,  FiltersDrawer,  SortPopup } from '.'
 import { Container } from './container'
 
 export const TopBar = () => {
@@ -7,7 +7,7 @@ export const TopBar = () => {
 			<Container className='mt-4 flex justify-between flex-wrap gap-4'>
 				<Categories />
 				<SortPopup />
-				<FiltersMenu/>
+				<FiltersDrawer/>
 			</Container>
 		</div>
 	)
