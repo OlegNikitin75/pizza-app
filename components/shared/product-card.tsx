@@ -22,7 +22,6 @@ export const ProductCard: FC<IProductCardProps> = ({
 	price,
 	imageUrl,
 	ingredients,
-	className
 }) => {
 
 

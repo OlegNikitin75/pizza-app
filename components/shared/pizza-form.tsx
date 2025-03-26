@@ -1,19 +1,17 @@
 'use client'
 
 import {
-	mapPizzaType,
 	PizzaSize,
 	PizzaType,
 	pizzaTypesOptions
 } from '@/constants/pizza'
+import { usePizzaOptions } from '@/hooks'
 import {
-	getAvailablePizzaSizes,
 	getIngredientsList,
-	pizzaCostCalculation
+	getPizzaDetails,
 } from '@/lib'
 import { Ingredient, ProductItem } from '@prisma/client'
-import { FC, useEffect, useState } from 'react'
-import { useSet } from 'react-use'
+import { FC } from 'react'
 
 import { H3, P, PizzaImage, PizzaIngredient, VariantsSelector } from '.'
 import { Button } from '../ui'
@@ -35,36 +33,28 @@ export const PizzaForm: FC<IProductForm> = ({
 	items,
 	onClickAddToCart
 }) => {
-	const [size, setSize] = useState<PizzaSize>(30)
-	const [type, setType] = useState<PizzaType>(2)
+	const {
+		size,
+		type,
+		setSize,
+		setType,
+		selectedIngredients,
+		addIngredient,
+		availablePizzaSizes
+	} = usePizzaOptions(items)
 
-	const [selectedIngredients, { toggle: addIngredient }] = useSet(
-		new Set<number>([])
-	)
-	const availablePizzaSizes = getAvailablePizzaSizes(items, type)
-
-	const totalPizzaPrice = pizzaCostCalculation(
+	const { textDetails, totalPizzaPrice } = getPizzaDetails(
 		items,
 		size,
+		type,
 		allIngredients,
 		selectedIngredients
 	)
 
-	useEffect(() => {
-		const isAvailableSize = availablePizzaSizes?.find(
-			item => Number(item.value) === size && !item.disabled
-		)
-		const availablePrimarySize = availablePizzaSizes?.find(
-			item => !item.disabled
-		)
-		if (!isAvailableSize && availablePrimarySize)
-			setSize(Number(availablePrimarySize.value) as PizzaSize)
-	}, [availablePizzaSizes, size])
-
 	const handleClick = () => {
 		onClickAddToCart?.()
 	}
-	const textDetails = `${size} см, ${mapPizzaType[type]} тесто`
+
 	return (
 		<div className='flex justify-between flex-col md:flex-row'>
 			<PizzaImage src={imageUrl} alt={name} size={size} />

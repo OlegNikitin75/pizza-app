@@ -44,9 +44,11 @@ export const CheckboxFiltersGroup: FC<ICheckboxFiltersGroupProps> = ({
 				{...Array(items.length)
 					.fill(0)
 					.map((_, index) => (
-						<Skeleton key={index} className='h-6 mb-4 rounded-md bg-app-black/10' />
+						<Skeleton
+							key={index}
+							className='h-6 mb-4 rounded-md bg-app-black/10'
+						/>
 					))}
-
 			</div>
 		)
 	}

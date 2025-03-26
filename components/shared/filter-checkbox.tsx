@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useId } from 'react'
+import { FC, ReactNode } from 'react'
 
 import { Checkbox } from '../ui/checkbox'
 
@@ -21,7 +21,6 @@ export const FilterCheckbox: FC<IFilterCheckboxProps> = ({
 	checked,
 	name
 }) => {
-	const id = useId()
 	return (
 		<div className='flex items-center gap-x-2'>
 			<Checkbox
@@ -31,7 +30,10 @@ export const FilterCheckbox: FC<IFilterCheckboxProps> = ({
 				className='w-6 h-6 rounded-md'
 				id={`checkbox-${String(name)}-${String(value)}`}
 			/>
-			<label htmlFor={`checkbox-${String(name)}-${String(value)}`} className='cursor-pointer flex-1'>       
+			<label
+				htmlFor={`checkbox-${String(name)}-${String(value)}`}
+				className='cursor-pointer flex-1'
+			>
 				{text}
 			</label>
 			{endAdornment}

@@ -5,14 +5,10 @@ import { Product } from '@prisma/client'
 import clsx from 'clsx'
 import { Search } from 'lucide-react'
 import Link from 'next/link'
-import { FC, SetStateAction, useRef, useState } from 'react'
+import { SetStateAction, useRef, useState } from 'react'
 import { useClickAway, useDebounce } from 'react-use'
 
-interface ISearchInputProps {
-	className?: string
-}
-
-export const SearchInput: FC<ISearchInputProps> = ({ className }) => {
+export const SearchInput = ({ className }: { className?: string }) => {
 	const [focused, setFocused] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 	const [products, setProducts] = useState<Product[]>([])

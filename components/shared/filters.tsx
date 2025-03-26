@@ -1,9 +1,7 @@
 'use client'
 
-import { useFiltersState } from '@/hooks/use-filters-state'
-import { useIngredients } from '@/hooks/use-ingredients'
-import { useQueryFilters } from '@/hooks/use-query-filters'
 
+import { useFiltersState, useIngredients, useQueryFilters } from '@/hooks'
 import { CheckboxFiltersGroup, H3, RangeSlider } from '.'
 import { Input } from '../ui'
 

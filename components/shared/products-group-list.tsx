@@ -6,7 +6,7 @@ import clsx from 'clsx'
 import { FC, useEffect, useRef } from 'react'
 import { useIntersection } from 'react-use'
 
-import {  H2 } from '.'
+import { H2 } from '.'
 import { ProductCard } from './product-card'
 
 interface IProductsGroupListProps {
@@ -20,7 +20,6 @@ interface IProductsGroupListProps {
 
 export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 	title,
-	idForUrl,
 	items,
 	listClassName,
 	categoryId
@@ -37,14 +36,10 @@ export const ProductsGroupList: FC<IProductsGroupListProps> = ({
 
 	return (
 		<div id={title} ref={intersectionRef} className='mt-5'>
-		
 			<H2 className='mb-4'>{title}</H2>
 
 			<div
-				className={clsx(
-					'flex flex-wrap gap-4 justify-center',
-					listClassName
-				)}
+				className={clsx('flex flex-wrap gap-4 justify-center', listClassName)}
 			>
 				{items.map(item => (
 					<ProductCard
