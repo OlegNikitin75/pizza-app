@@ -67,6 +67,7 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 								onClickCountButton={type =>
 									onClickCountButton(item.id, item.quantity, type)
 								}
+								onClickRemove={() => removeCartItem(item.id)}
 							/>
 						))}
 					</div>
@@ -79,7 +80,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 								{' '}
 								Итого:
 							</span>
-							<span className='font-bold text-lg'>{totalAmount} руб.</span>
+							<span className='font-bold text-lg'>
+								{totalAmount.toFixed(2)} руб.
+							</span>
 						</div>
 						<Link href='/cart'>
 							<Button
