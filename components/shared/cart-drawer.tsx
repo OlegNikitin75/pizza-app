@@ -1,10 +1,11 @@
 'use client'
 
 import { PizzaSize, PizzaType } from '@/constants/pizza'
+import { useCart } from '@/hooks'
 import { getCartItemDetails } from '@/lib'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { FC, PropsWithChildren} from 'react'
+import { FC, PropsWithChildren } from 'react'
 
 import { CartDrawerItem } from '.'
 import {
@@ -17,25 +18,36 @@ import {
 	SheetTitle,
 	SheetTrigger
 } from '../ui'
-import { useCart } from '@/hooks'
 
 export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
-	
-	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart();
-	console.log(items)
+	const { totalAmount, updateItemQuantity, items, removeCartItem } = useCart()
 
-
+	const onClickCountButton = (
+		id: number,
+		quantity: number,
+		type: 'plus' | 'minus'
+	) => {
+		const newQuantity = type === 'plus' ? quantity + 1 : quantity - 1
+		updateItemQuantity(id, newQuantity)
+	}
 
 	return (
 		<Sheet>
 			<SheetTrigger asChild>{children}</SheetTrigger>
-
 			<SheetContent className='pb-0 flex flex-col justify-between gap-5 bg-app-line-gray'>
 				<SheetHeader>
 					<SheetTitle>
-						В корзине <span>3 товара</span>
+						{items.length === 0 ? (
+							<span>Ваша корзина пуста</span>
+						) : (
+							<span>
+								Всего товаров в корзине <span>{items.length}</span>
+							</span>
+						)}
 					</SheetTitle>
-					<SheetDescription>Все товары в корзине</SheetDescription>
+					<SheetDescription className='hidden'>
+						Все товары в корзине
+					</SheetDescription>
 				</SheetHeader>
 				<div className='-mx-6 overflow-auto flex-1 mt-5'>
 					<div className='mb-2'>
@@ -52,6 +64,9 @@ export const CartDrawer: FC<PropsWithChildren> = ({ children }) => {
 								name={item.name}
 								price={item.price}
 								quantity={item.quantity}
+								onClickCountButton={type =>
+									onClickCountButton(item.id, item.quantity, type)
+								}
 							/>
 						))}
 					</div>

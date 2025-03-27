@@ -16,7 +16,7 @@ export const FiltersDrawer = () => {
 	return (
 		<Sheet>
 			<SheetTrigger asChild className='h-12 text-base bg-app-line-gray flex-1'>
-				<Button variant='outline' className='flex items-center gap-3'>
+				<Button variant='outline' className='flex items-center gap-3 w-32'>
 					Показать фильтры
 					<SlidersHorizontal size={16} color='#FF7010' />
 				</Button>

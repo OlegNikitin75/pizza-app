@@ -1,15 +1,8 @@
 'use client'
 
-import {
-	PizzaSize,
-	PizzaType,
-	pizzaTypesOptions
-} from '@/constants/pizza'
+import { PizzaSize, PizzaType, pizzaTypesOptions } from '@/constants/pizza'
 import { usePizzaOptions } from '@/hooks'
-import {
-	getIngredientsList,
-	getPizzaDetails,
-} from '@/lib'
+import { getIngredientsList, getPizzaDetails } from '@/lib'
 import { Ingredient, ProductItem } from '@prisma/client'
 import { FC } from 'react'
 

@@ -35,7 +35,7 @@ export const ProductCard: FC<IProductCardProps> = ({
 			<div className='flex-1 p-3 flex flex-col justify-between w-full'>
 				<div>
 					<H3>{name}</H3>
-					<P>{getIngredientsList(ingredients)}</P>
+					<P className='line-clamp-3'>{getIngredientsList(ingredients)}</P>
 				</div>
 
 				<div className='flex justify-between items-center mt-4'>
