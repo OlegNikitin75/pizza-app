@@ -15,8 +15,12 @@ interface IProductForm {
 	pizzaIngredients: Ingredient[]
 	allIngredients: Ingredient[]
 	items: ProductItem[]
-	onClickAddToCart?: VoidFunction
+	onSubmit: (itemId: number, ingredients: number[]) => void
 }
+/**
+ * Форма пиццы
+ *
+ */
 
 export const PizzaForm: FC<IProductForm> = ({
 	imageUrl,
@@ -24,7 +28,7 @@ export const PizzaForm: FC<IProductForm> = ({
 	pizzaIngredients,
 	allIngredients,
 	items,
-	onClickAddToCart
+	onSubmit
 }) => {
 	const {
 		size,
@@ -33,7 +37,8 @@ export const PizzaForm: FC<IProductForm> = ({
 		setType,
 		selectedIngredients,
 		addIngredient,
-		availablePizzaSizes
+		availablePizzaSizes,
+		currentItemId
 	} = usePizzaOptions(items)
 
 	const { textDetails, totalPizzaPrice } = getPizzaDetails(
@@ -45,7 +50,7 @@ export const PizzaForm: FC<IProductForm> = ({
 	)
 
 	const handleClick = () => {
-		onClickAddToCart?.()
+		if (currentItemId) onSubmit(currentItemId, Array.from(selectedIngredients))
 	}
 
 	return (
